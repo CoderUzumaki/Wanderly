@@ -1,19 +1,18 @@
-// Importing React
-import React from 'react';
-
-// Importing components
-import NavBar from './components/NavBar';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
+import Error404 from './pages/404Error';
 
 function App() {
   return (
-    <div>
-      <NavBar />
-    <div className="text-center">
-      <h1 className="text-3xl font-bold text-blue-500">
-        Hello, Tailwind is working!
-      </h1>
-    </div>
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        <Route path="*" element={<Error404 />} />
+
+      </Routes>
+    </Router>
   );
 }
+
 export default App;
