@@ -3,30 +3,58 @@ import { motion } from "framer-motion";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
+const SignUpPage = () => {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [error, setError] = useState('');
+    const navigate = useNavigate();
 
-const LoginPage = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setError(''); 
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setError('');
+        if (!name || !email || !password || !confirmPassword) {
+            setError('All fields are required.');
+            return;
+        }
 
-    try {
-      const res = await axios.post('/api/auth', {
-        email,
-        password
-      });
+        if (password !== confirmPassword) {
+            setError('Passwords do not match.');
+            return;
+        }
 
-      navigate('/home');
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setError('Please enter a valid email address.');
+            return;
+        }
 
-    } catch (error) {
-      setError('Invalid email or password. Please try again.'); 
-      console.log(error);
-    }
-  }
+        if (password.length < 8) {
+            setError('Password must be at least 8 characters.');
+            return;
+        }
+
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+        if (!password.match(passwordRegex)) {
+            setError('Password must contain special characters, lower-case, upper-case letters and digits.');
+            return;
+        }
+
+        try {
+            const res = await axios.post('/api/auth/signup', {
+                name,
+                email,
+                password,
+                confirmPassword,
+            });
+
+            navigate('/home');
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
   return (
     <div
@@ -43,7 +71,22 @@ const LoginPage = () => {
       <div className="w-full lg:w-1/2 flex flex-col items-center justify-center p-8">
         <img src="/images/logo-nobg.png" alt="Logo" className="mb-4 w-20 h-auto" />
         <form className="w-full max-w-md" onSubmit={handleSubmit}>
-        {error && <div className="text-red-500 mb-4">{error}</div>}
+          {error && <div className="text-red-500 mb-4">{error}</div>}
+        <div className="mb-4">
+            <label
+              htmlFor="name"
+              className="block text-gray-700 text-sm font-bold mb-2"
+            >
+              Name
+            </label>
+            <input
+              type="string"
+              id="name"
+              placeholder="Name"
+              onChange={(e) => setName(e.target.value)}
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
+          </div>
           <div className="mb-4">
             <label
               htmlFor="email"
@@ -56,6 +99,7 @@ const LoginPage = () => {
               id="email"
               placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
+              autoComplete='off'
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
           </div>
@@ -73,12 +117,21 @@ const LoginPage = () => {
               onChange={(e) => setPassword(e.target.value)}
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
             />
-            <a
-              href="#"
-              className="text-sm text-indigo-500 hover:underline block text-right mt-2"
+          </div>
+          <div className="mb-6">
+            <label
+              htmlFor="confirmPassword"
+              className="block text-gray-700 text-sm font-bold mb-2"
             >
-              Forgot Password?
-            </a>
+              Confirm Password
+            </label>
+            <input
+              type="Password"
+              id="confirmPassword"
+              placeholder="Confirm Password"
+              onChange={(e) => setConfirmPassword(e.target.value)}
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            />
           </div>
 
           <motion.button
@@ -106,7 +159,7 @@ const LoginPage = () => {
             <span
               className="text-white tracking-wide font-bold h-full w-full block relative linear-mask"
             >
-              LOGIN
+                SIGN IN
             </span>
 
             <span
@@ -115,19 +168,18 @@ const LoginPage = () => {
           </motion.button>
 
           <span className='flex justify-center gap-2 items-center'>
-            Don't have an account?
+            Already have an account?
             <Link
-              to="/signup"
+              to="/"
               className="text-sm text-indigo-500 hover:underline block"
             >
-              Sign Up
+              Log in
             </Link>
           </span>
-
         </form>
       </div>
     </div>
   );
 };
 
-export default LoginPage;
+export default SignUpPage;

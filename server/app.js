@@ -8,7 +8,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000'
+}));
 app.use(express.json());
 
 // Routes
@@ -23,6 +25,8 @@ mongoose.connect('mongodb://localhost:27017/wanderly_auth')
 app.use((err, req, res, next) => {
     err.statusCode = err.statusCode || 500;
     err.status = err.status || 'error';
+
+    console.log(err)
 
     res.status(err.statusCode)
     .json({
