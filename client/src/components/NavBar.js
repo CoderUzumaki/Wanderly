@@ -9,7 +9,7 @@ const NavBar = () => {
   };
 
   return (
-      <nav className="flex justify-between items-center h-[10vh] w-[92%] mx-auto">
+      <nav className="flex bg-white z-10 justify-between items-center h-[10vh] w-[92%] mx-auto fixed">
         <div>
           <img className='w-48' src='images/wanderly.png' alt='...' />
         </div>
@@ -38,7 +38,7 @@ const NavBar = () => {
         {/* Sign Up Button */}
         <div className='flex items-center gap-6'>
 
-          <button className='text-black font-bold px-5 py-2 rounded-full hover:bg-blue-500 hover:text-white font-[quicksand]'>
+          <button className='text-black font-bold px-5 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-[quicksand]'>
             Log In
           </button>
 

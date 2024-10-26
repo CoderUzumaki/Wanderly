@@ -4,8 +4,8 @@ import { motion } from "framer-motion";
 
 const Footer = () => {
     return (
-        <footer>
-            <div className=" text-white p-10 flex flex-col md:flex-row items-center justify-between bg-cover h-auto" style={{ backgroundImage: "url('images/bg-img-01.png')" }}>
+        <footer className="w-full flex justify-center">
+            <div className=" text-white p-10 flex flex-col md:flex-row items-center justify-between bg-cover bg-center w-[92%] h-auto" style={{ backgroundImage: "url('images/bg-img-01.png')" }}>
 
                 {/* Left Section */}
                 {/* <div className="md:w-1/2 w-3/4 text-left flex flex-col justify-center">
