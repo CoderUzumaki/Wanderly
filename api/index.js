@@ -4,6 +4,7 @@ import mongoose, { mongo } from 'mongoose';
 
 // import Routes
 import userRouter from './routes/user.router.js';
+import authRouter from './routes/auth.router.js';
 
 // import dotenv
 import dotenv from 'dotenv';
@@ -23,4 +24,7 @@ app.listen(process.env.PORT, () => {
 });
 
 // Middleware
-app.use('/user/api', userRouter);
+app.use(express.json());   // Middleware to parse JSON data
+
+app.use('/api/user', userRouter);
+app.use('/api/auth', authRouter);
