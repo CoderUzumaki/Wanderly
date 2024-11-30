@@ -11,6 +11,6 @@ mongoose.connect(process.env.MONGO).then(() => {
 
 const app = express();
 
-app.listen(3500, () => {
-    console.log('Server is running on port 3500!');
+app.listen(process.env.PORT, () => {
+    console.log(`Server is running on port ${process.env.PORT}!`);
 });
