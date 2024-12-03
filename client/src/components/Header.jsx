@@ -9,7 +9,7 @@ export default function Header() {
   };
 
   return (
-    <header className="py-4 bg-sky-200 shadow-md">
+    <header className="py-4 bg-sky-200 shadow-md z-50 absolute top-0 w-screen">
       <div className="container flex justify-between items-center max-w-6xl mx-auto px-3">
         {/* Logo Section */}
         <Link to="/">
@@ -70,7 +70,7 @@ export default function Header() {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6 sm:hidden text-slate-900"
+                className="size-7 sm:hidden text-slate-900"
               >
                 <path
                   strokeLinecap="round"
@@ -89,7 +89,7 @@ export default function Header() {
               viewBox="0 0 24 24"
               strokeWidth={1.5}
               stroke="currentColor"
-              className="size-6 text-slate-900"
+              className="size-7 text-slate-900"
             >
               <path
                 strokeLinecap="round"

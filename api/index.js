@@ -28,3 +28,12 @@ app.use(express.json());   // Middleware to parse JSON data
 
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
+
+app.use((err, req, res, next) => {
+    const statusCode = 500 || err.statusCode;
+    return res.status(statusCode).json({
+        success: false,
+        status: statusCode,
+        message: err.message,
+    });
+});

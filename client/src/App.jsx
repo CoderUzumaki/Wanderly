@@ -8,7 +8,7 @@ import Header from './components/Header';
 import Home from './pages/Home';
 import About from './pages/About';
 import Login from './pages/Login';
-import Logout from './pages/Logout';
+import Signup from './pages/Signup';
 import Profile from './pages/Profile';
 import Error404 from './pages/Error404';
 
@@ -21,7 +21,7 @@ export default function App() {
         <Route path='/' element={<Home/>} />
         <Route path='/about' element={<About/>} />
         <Route path='/login' element={<Login/>} />
-        <Route path='/logout' element={<Logout/>} />
+        <Route path='/signup' element={<Signup/>} />
         <Route path='/profile' element={<Profile/>} />
         <Route path='*' element={<Error404/>} />
       </Routes>
